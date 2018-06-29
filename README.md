@@ -16,3 +16,18 @@ The related codelabs can be found at:
 ## Screens
 
 ![screen](../master/preview_images/preview_login.png)      ![screen](../master/preview_images/preview_home.png)   
+
+## What you'll need
+* The Flutter SDK
+* Android Studio with Flutter plugins, or your favorite code editor
+* The sample code
+
+### To build and run Flutter apps on iOS:
+* A computer running macOS
+* Xcode 9 or newer
+* iOS Simulator, or a physical iOS device
+
+### To build and run Flutter apps on Android:
+* A computer running macOS, Windows, or Linux
+* Android Studio
+* Android Emulator (comes with Android Studio), or a physical Android device
