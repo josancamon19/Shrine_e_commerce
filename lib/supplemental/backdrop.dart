@@ -134,7 +134,7 @@ class _FrontLayer extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Material(
       elevation: 16.0,
       shape: BeveledRectangleBorder(
