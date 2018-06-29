@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:Shrine/supplemental/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -41,39 +42,68 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 120.0),
             // TODO: Add TextField widgets (101)
-            TextField(
-              decoration: new InputDecoration(
-                labelText: "Username",
-                filled: true,
+            PrimaryColorOverride(
+              color: kShrineBrown900,
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                ),
               ),
-              controller: _usernameController,
             ),
             const SizedBox(height: 12.0),
-            TextField(
-              decoration:
-                  new InputDecoration(labelText: "Username", filled: true),
-              controller: _passwordController,
+            PrimaryColorOverride(
+              color: kShrineBrown900,
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+              ),
             ),
             // TODO: Add button bar (101)
             ButtonBar(
               children: <Widget>[
                 new FlatButton(
-                  onPressed: () {
-                    _usernameController.clear();
-                    _passwordController.clear();
-                  },
-                  child: Text("CANCEL"),
-                ),
-                new RaisedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      _usernameController.clear();
+                      _passwordController.clear();
                     },
-                    child: Text("NEXT")),
+                    child: Text("CANCEL"),
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    )),
+                new RaisedButton(
+                  elevation: 8.0,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("NEXT"),
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                  ),
+                ),
               ],
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+class PrimaryColorOverride extends StatelessWidget {
+  const PrimaryColorOverride({Key key, this.color, this.child})
+      : super(key: key);
+
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      child: child,
+      data: Theme.of(context).copyWith(primaryColor: color),
     );
   }
 }

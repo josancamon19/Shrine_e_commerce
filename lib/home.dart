@@ -14,34 +14,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'supplemental/asymmetric_view.dart';
 
 import 'model/data.dart';
 import 'model/product.dart';
 
 class HomePage extends StatelessWidget {
+  final Category category;
+
+  const HomePage({this.category: Category.all});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: new AppBar(
-          title: Text('SHRINE'),
-          leading: new IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () => debugPrint("Menu button")),
-          actions: <Widget>[
-            new IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () => debugPrint("search touched")),
-            new IconButton(
-                icon: Icon(Icons.tune),
-                onPressed: () => debugPrint("tune touched")),
-          ],
-        ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          children: _buildCards(context),
-        ));
+    return AsymmetricView(products: getProducts(category));
   }
 
   List<Card> _buildCards(BuildContext context) {
@@ -54,8 +39,9 @@ class HomePage extends StatelessWidget {
         locale: Localizations.localeOf(context).toString());
     return products.map((product) {
       return Card(
+        elevation: 0.0,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             AspectRatio(
               aspectRatio: 18.0 / 11.0,
@@ -69,17 +55,20 @@ class HomePage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      product.name,
-                      style: theme.textTheme.title,
+                      product == null ? '' : product.name,
+                      style: theme.textTheme.button,
                       maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 8.0),
+                    SizedBox(height: 4.0),
                     Text(
-                      formatter.format(product.price),
-                      style: theme.textTheme.body2,
+                      product == null ? '' : formatter.format(product.price),
+                      style: theme.textTheme.caption,
                     )
                   ],
                 ),
